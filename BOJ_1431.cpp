@@ -13,7 +13,7 @@ int sum(string s) {
 	return ans;
 }
 
-bool cmp(string& s1, string& s2) {
+bool cmp(const string& s1, const string& s2) {
 	if (s1.length() != s2.length())
 		return s1.length() < s2.length();
 	if (sum(s1) != sum(s2))
@@ -25,7 +25,6 @@ int main()
 {
 	int n;
 
-	//입력
 	cin >> n;
 	
 	vector<string> serials(n);
@@ -33,10 +32,8 @@ int main()
 	for (int i = 0; i < n; i++)
 		cin >> serials[i];
 
-	// 연산
 	sort(serials.begin(), serials.end(), cmp);
 
-	// 출력
 	for (int i = 0; i < n; i++)
 		cout << serials[i] << "\n";
 
