@@ -1,56 +1,66 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <stack>
 #include <string>
 
 using namespace std;
 
-int main() {
-    string str;
+bool checkIsBalanced(string str) {
     stack<char> chars;
+    bool is_balanced = true;
 
-    while (true) {
-        // getlineÀ¸·Î ÇÑ ÁÙ ÅëÂ°·Î ¹Ş±â
-        getline(cin, str);
-        if (str == ".") break;
+    for (char ch : str) {
+        // ì™¼ìª½ ê´„í˜¸ëŠ” ë‹¨ìˆœíˆ ìŠ¤íƒì— ë„£ê¸°ë§Œ í•˜ê¸°
+        if (ch == '[' || ch == '(')
+            chars.push(ch);
 
-        bool isBalanced = true;
-
-        for (char ch : str) {
-            // ¿ŞÂÊ °ıÈ£´Â ´Ü¼øÈ÷ ½ºÅÃ¿¡ ³Ö±â¸¸ ÇÏ±â
-            if (ch == '[')
-                chars.push('[');
-            else if (ch == '(')
-                chars.push('(');
-
-            // ¿À¸¥ÂÊ °ıÈ£ ¾Ë°í¸®Áò
-            // 1. ¿ŞÂÊ °ıÈ£°¡ Á÷Àü¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ±â
-            // 2. ¾ø´Ù¸é isBalancedµµ false·Î Ã³¸®ÇÏ°í break ½ÃÅ°±â
-            else if (ch == ']') {
-                if (!chars.empty() && chars.top() == '[')
-                    chars.pop();
-                else {
-                    isBalanced = false;
-                    break;
-                }
-            }
-            else if (ch == ')') {
-                if (!chars.empty() && chars.top() == '(')
-                    chars.pop();
-                else {
-                    isBalanced = false;
-                    break;
-                }
+        // ì˜¤ë¥¸ìª½ ê´„í˜¸ ì²˜ë¦¬
+        // 1. ì™¼ìª½ ê´„í˜¸ê°€ ì§ì „ì— ìˆëŠ”ì§€ í™•ì¸í•˜ê¸°
+        // 2. ì—†ë‹¤ë©´ isBalancedë„ falseë¡œ ì²˜ë¦¬í•˜ê³  break ì‹œí‚¤ê¸°
+        else if (ch == ']') {
+            if (!chars.empty() && chars.top() == '[')
+                chars.pop();
+            else {
+                is_balanced = false;
+                break;
             }
         }
+        else if (ch == ')') {
+            if (!chars.empty() && chars.top() == '(')
+                chars.pop();
+            else {
+                is_balanced = false;
+                break;
+            }
+        }
+    }
 
-        // µé¾î¿Â ÇÑ ÁÙ¿¡ ´ëÇÑ Ã³¸®ÇÏ±â
-        if (isBalanced && chars.empty())
+    // !ì£¼ì˜! ëª¨ë“  ê´„í˜¸ê°€ ì²˜ë¦¬ë˜ê³ , ìŠ¤íƒì´ ë¹„ì–´ìˆì–´ì•¼ ê· í˜•ì´ ë§ìŒ
+    if (!chars.empty()) {
+        is_balanced = false;
+    }
+
+    return is_balanced;
+}
+
+int main() {
+    string str;
+
+    while (true) {
+
+        // getlineìœ¼ë¡œ í•œ ì¤„ í†µì§¸ë¡œ ë°›ê¸°
+        getline(cin, str);
+
+        if (str == ".") {
+            return 0;
+        }
+
+        // ê· í˜• ì—¬ë¶€ í™•ì¸
+        if (checkIsBalanced(str)) {
             cout << "yes\n";
-        else
+        }
+        else {
             cout << "no\n";
-
-        // ½ºÅÃ ºñ¿ì±â
-        while (!chars.empty()) chars.pop();
+        }
     }
 
     return 0;
