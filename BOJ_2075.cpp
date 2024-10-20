@@ -3,33 +3,21 @@
 
 using namespace std;
 
-typedef long long ll;
-
 // min_heap을 n 사이즈로 유지하며 n^2개의 입력을 받는 메서드
-void getInput(const int n, priority_queue<ll, vector<ll>, greater<ll>>& pq) {
-	ll num;
+void getInput(const int n, priority_queue<int, vector<int>, greater<int>>& pq) {
+	int num;
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
+	// n ^ 2까지로 조건을 변경해서 불필요한 2중 반복문 삭제
+	for (int i = 0; i < n * n; i++) {
 			cin >> num;
 			pq.push(num);
 
 			// 크기가 n을 넘으면 가장 작은 값 제거
 			if (pq.size() > n)
 				pq.pop();
-		}
 	}
 
 	return;
-}
-
-// 가장 마지막에 위치한 n번째로 큰 수를 리턴하는 메서드
-int nth(int n, priority_queue<ll>& pq) {
-	while (--n) {
-		pq.pop();
-	}
-
-	return pq.top();
 }
 
 int main() {
@@ -39,7 +27,7 @@ int main() {
 	int n;
 	cin >> n;
 
-	priority_queue<ll, vector<ll>, greater<ll>> min_heap;
+	priority_queue<int, vector<int>, greater<int>> min_heap;
 	getInput(n, min_heap);
 
 	cout << min_heap.top() << "\n";
