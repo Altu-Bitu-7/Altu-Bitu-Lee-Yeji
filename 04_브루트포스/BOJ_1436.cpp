@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// string으로 형변환 없이 666이 포함되어 있는지 확인하는 함수
+// 숫자에서 666이 포함되어 있는지 확인하는 함수
 bool contains666(int num) {
 	int consecutiveSixes = 0;
 
