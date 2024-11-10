@@ -72,7 +72,7 @@ int main() {
 
     int result = cleanRoom(n, m, x, y, dir, room);
 
-    cout << result << endl;
+    cout << result << "\n";
 
     return 0;
 }
