@@ -51,8 +51,14 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		cin >> lengths[i];
 	}
-
+	
+	/*
+	가지고 있는 과자의 길이 자체로는 탐색하지 않으며,
+	순서에 상관 없이 주어진 길이로 과자 몇 개를 나눠줄 수 있는지 계산할 때만 사용
+	 => 정렬 필요 없음
+	
 	sort(lengths.begin(), lengths.end());
+	*/
 
 	cout << findMaxSnackLength(m, lengths) << "\n";
 		
